@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {name}
+  namespace: {namespace}
+spec:
+  replicas: {replicas}
+  selector:
+    matchLabels:
+      app: {app}
+      branch: {branch}
+      superpeng: {superpeng}
+  template:
+    metadata:
+      labels:
+        app: {app}
+        branch: {branch}
+        superpeng: {superpeng}
+    spec:
+      containers:
+      - name: {name}
+        image: {image}
+        env:
+          {env}
+        resources:
+          requests:
+            memory: 400Mi
+            cpu: 200m
+          limits:
+            memory: 400Mi
+            cpu: 200m
