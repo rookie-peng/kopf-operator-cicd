@@ -1,18 +1,24 @@
+import os
 import yaml
+import logging
 from configobj import ConfigObj
 
 
 # def app_config(config):
-def app_config():
+def app_config(root_path):
     """
-    处理代码仓库里面的configmap文件，生成应用配置
-    :return: key: value
+    处理代码仓库里面的env.config文件，生成应用配置
+    :return: list
     """
     app_setting = []
-    cfg = ConfigObj("./env.config", encoding='UTF-8')
+    cfg = ConfigObj(f"../../{root_path}/env.config", encoding='UTF-8')
+    try:
+        for k, v in cfg['app-setting'].items():
+            app_setting.append({"name": k, "value": v})
+    except Exception as e:
+        print(e.message)
+    # print(app_setting)
+    return app_setting
 
-    for k, v in cfg['app-setting'].items():
-        app_setting.append({"name": k, "value": v})
-    print(app_setting)
 
-app_config()
+# app_config('zhipeng.su/sql-archery')
