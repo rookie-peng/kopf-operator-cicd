@@ -39,7 +39,7 @@ def webhook():
                     'Content-Type': 'application/merge-patch+json',
                     'Authorization': 'Bearer ' + token,
                 }
-                body = json.dumps({"spec": {"random": random.randint(0, 9999)}})
+                body = json.dumps({"spec": {"resourceVersion": random.randint(0, 9999)}})
                 response = requests.patch(url, data=body, headers=headers, verify=False)
 
                 print(json.dumps(json.loads(response.text), indent=4))

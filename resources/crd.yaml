@@ -22,13 +22,13 @@ spec:
       properties:
         spec:
           required:
-            - random
+            - resourceVersion
             - replicas
             - gitrepo
             - gitbranch
             - type
           properties:
-            random: #----必须是整数，最小值必须为0，最大值必须为9999
+            resourceVersion: #----必须是整数，最小值必须为0，最大值必须为9999
               type: integer
               minimum: 0
               maximum: 9999

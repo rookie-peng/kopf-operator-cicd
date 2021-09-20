@@ -7,3 +7,4 @@ spec:
   gitrepo: "https://github.com/gbaeke/archery.git"
   gitbranch: release
   type: python
+  resourceVersion: 1     # random

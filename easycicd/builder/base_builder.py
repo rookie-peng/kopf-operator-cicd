@@ -14,6 +14,7 @@ class BuilderBase(object):
         # self.token = os.environ.get('gitlab-token')
         self.token = 'XzQ6Jm_qk67ZxqhuYW9F'
 
+        self.start_get
         self.client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
     def conn(self):

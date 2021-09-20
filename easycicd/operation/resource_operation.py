@@ -7,7 +7,7 @@ import requests
 from kubernetes import client
 from .rewrite_patch import AppsV2Api
 from .resource_configmap import app_config
-from easycicd.builder import base_builder, go_builder, java_builder
+from easycicd.builder import base_builder, go_builder, java_builder, nodejs_builder, python_builder
 
 
 @kopf.on.create('EasyCicd')
@@ -18,13 +18,23 @@ def create_fn(spec, name, namespace, logger, **kwargs):
     replicas = spec.get('replicas')
     labels = {'app': name, 'superpeng': 'easycicd', 'branch': gitbranch}  # 不区分数据类型，都要加引号
 
+    # 拆分url，分成两部分
     m = re.search('(https?://[A-Za-z_0-9.-]+)/(.*)', repo)
     url = m.group(1)
     root_path = m.group(2)
-    ci = base_builder.BuilderBase(url=url, root_path=root_path, gitbranch=gitbranch)
-    ci.start_get()
-    image = "busybox:latest"
-    env = app_config(root_path)
+
+    # 根据type判断代码语言，从而调用不同的builder，并使用eval使字符串变为可调用对象
+    fun = eval(f"{type}_builder").Builder(url=url, root_path=root_path, gitbranch=gitbranch)
+
+    # CI部分，处理代码下载，返回镜像和环境变量.
+    # ci = base_builder.BuilderBase(url=url, root_path=root_path, gitbranch=gitbranch)
+    # ci.start_get()
+    # image = "busybox:latest"
+    # env = app_config(root_path)
+
+    image, env, build_log = fun.builder
+    print("------------image", image)
+    print("------------env", image)
 
     # path = os.path.join(os.path.dirname(__file__), 'deploy.yaml')
     # with open(path, 'rt') as f:
