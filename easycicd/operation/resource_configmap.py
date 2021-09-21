@@ -16,7 +16,7 @@ def app_config(root_path):
         for k, v in cfg['app-setting'].items():
             app_setting.append({"name": k, "value": v})
     except Exception as e:
-        print(e.message)
+        print(str(e))
     # print(app_setting)
     return app_setting
 
