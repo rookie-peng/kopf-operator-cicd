@@ -32,7 +32,7 @@ def create_fn(spec, name, namespace, logger, **kwargs):
     # image = "busybox:latest"
     # env = app_config(root_path)
 
-    image, env, build_log = fun.builder
+    image, env, build_log = fun.builder()
     print("------------image", image)
     print("------------env", image)
 
