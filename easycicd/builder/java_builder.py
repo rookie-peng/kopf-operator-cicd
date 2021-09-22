@@ -14,8 +14,9 @@ class Builder(BuilderBase):
         tag = "registry.rootcloud.com/devops" + "/" + self.root_path.split("/")[1] + ":" + str(time.time()).split(".")[0]
         env = app_config(self.root_path)
         print("&&&&&&&&&&&&&&&&&&&&&, flag1")
-        with open("easycicd/builder/multi-stage-dockerfile/Dockerfile.java", "r") as fileobj:
-            image, build_log = self.client.images.build(fileobj=fileobj, tag=tag, target='BUILD', rm=True)
+        # with open("easycicd/builder/multi-stage-dockerfile/Dockerfile.java", "r") as fileobj:
+        #     image, build_log = self.client.images.build(fileobj=fileobj, tag=tag, target='BUILD', rm=True)
+        image, build_log = self.client.images.build(path='easycicd/builder/multi-stage-dockerfile/', dockerfile='Dockerfile.java', tag=tag, target='BUILD', rm=True)
 
         return image, env, build_log
 
