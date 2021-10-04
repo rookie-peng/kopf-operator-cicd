@@ -16,8 +16,12 @@ class Builder(BuilderBase):
         print("&&&&&&&&&&&&&&&&&&&&&, flag1")
         # with open("easycicd/builder/multi-stage-dockerfile/Dockerfile.java", "r") as fileobj:
         #     image, build_log = self.client.images.build(fileobj=fileobj, tag=tag, target='BUILD', rm=True)
-        image, build_log = self.client.images.build(path='easycicd/builder/multi-stage-dockerfile/', dockerfile='Dockerfile.java', tag=tag, target='BUILD', rm=True)
 
-        return image, env, build_log
+        # 通过arg传入rootpath, 方便dockerfile做处理
+        image, build_log = self.client.images.build(path='easycicd/builder/multi-stage-dockerfile/', dockerfile='Dockerfile.java', tag=tag, target='BUILD', rm=True)
+        # image = "nginx:v1"
+        print("image name is ------------------", image)
+        # return image, env, build_log
+        return image, env
 
 

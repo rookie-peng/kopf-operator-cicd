@@ -12,6 +12,7 @@ def app_config(root_path):
     """
     app_setting = []
     cfg = ConfigObj(f"../../{root_path}/env.config", encoding='UTF-8')
+    print('^^^^^^^^^^^^', root_path)
     try:
         for k, v in cfg['app-setting'].items():
             app_setting.append({"name": k, "value": v})

@@ -32,9 +32,10 @@ def create_fn(spec, name, namespace, logger, **kwargs):
     # image = "busybox:latest"
     # env = app_config(root_path)
 
-    image, env, build_log = fun.builder()
+    # image, env, build_log = fun.builder()
+    image, env = fun.builder()
     print("------------image", image)
-    print("------------env", image)
+    print("------------env", env)
 
     # path = os.path.join(os.path.dirname(__file__), 'deploy.yaml')
     # with open(path, 'rt') as f:

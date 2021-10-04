@@ -14,8 +14,8 @@ class BuilderBase(object):
         # self.token = os.environ.get('gitlab-token')
         self.token = 'XzQ6Jm_qk67ZxqhuYW9F'
 
-        self.start_get
-        self.client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+        self.start_get()
+        # self.client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
     def conn(self):
         """返回连接实例"""
@@ -40,7 +40,7 @@ class BuilderBase(object):
 
     def start_get(self):
         project = self.get_project_id(self.root_path)
-        info = project.repository_tree(all=True, recursive=True, as_list=True, ref='release')
+        info = project.repository_tree(all=True, recursive=True, as_list=True, ref=self.gitbranch)
         # for k, v in vars(project).items():
         #     print(k, v)
         file_list = []
@@ -65,5 +65,5 @@ class BuilderBase(object):
         # print('success')
 
 
-# st_init = BuilderBase('http://gitlab.irootech.com', 'zhipeng.su/sql-archery', 'release')
+# st_init = BuilderBase('http://gitlab.irootech.com', 'zhipeng.su/java-demo', 'master')
 # st_init.start_get()
